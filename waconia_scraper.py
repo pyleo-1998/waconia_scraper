@@ -3,8 +3,8 @@ import json
 import requests
 from bs4 import BeautifulSoup
 from typing import Optional,List
-from headers import pagination_headers
 from person_dataclass import Person_Data
+from headers import pagination_headers,html_page_headers
 
 
 class Waconia_Scraper:
@@ -66,7 +66,7 @@ class Waconia_Scraper:
 
     def __extract_data_from_html(self) -> Optional[BeautifulSoup]:
         
-        starting_page_response = requests.get('https://isd110.org/our-schools/laketown-elementary/staff-directory')
+        starting_page_response = self.session.get('https://isd110.org/our-schools/laketown-elementary/staff-directory',headers=html_page_headers)
 
         if self.debug:
             self.__save_html_page(starting_page_response)
